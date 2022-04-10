@@ -10,11 +10,9 @@ class IncomingCall {
     }
 }
 
-
 public class CallCenter {
 
     // accepts incoming call
-
     private ArrayList<User> users = new ArrayList<User>();
     private CallHandler ch;
 
@@ -22,6 +20,7 @@ public class CallCenter {
 
         // new users
         User operator1 = new User("Operator 1", 1);
+
         User operator2 = new User("Operator 2", 1);
         User operator3 = new User("Operator 3", 1);
         User supervisor1 = new User("Supervisor 1", 2);
@@ -40,7 +39,7 @@ public class CallCenter {
     }
 
     // handles incoming call
-    // checks user avaiability and assigns the call if someone is available
+    // checks user availability and assigns the call if someone is available
     public IncomingCall incomingCall() {
 
         Call newCall = new Call(); // create new call object
