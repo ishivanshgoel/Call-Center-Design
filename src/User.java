@@ -73,6 +73,7 @@ public class User {
     // mark call as finished
     public void finishCall(Call call) {
         call.answer();
+        this.status = 1;
     }
 
 }

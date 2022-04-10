@@ -1,16 +1,20 @@
 public class Call {
     private int status;
     private User handledBy;
+    private static int id = 0;
+    private int callId;
 
     Call () {
         status = 0;
+        id ++;
+        this.callId = id;
     }
 
     // mark call as pickup status
     public void pickup(User user) {
         // complete the call
-        status = 1;
-        handledBy = user;
+        this.status = 1;
+        this.handledBy = user;
         System.out.println("Call Picked by "+user.getName());
     }
 
@@ -28,14 +32,14 @@ public class Call {
     public String getStatus(){
 
         if(status == 0) {
-            return "In Coming...";
+            return "Call Id: " + this.callId + "In Coming...";
         }
         else if (status == 1) {
-            return "In Progress";
+            return "Call Id: " + this.callId + "In Progress";
         }
         else if (status == 2) {
-            return "Declined...";
+            return "Call Id: " + this.callId + "Declined...";
         }
-        return "Answered...";
+        return "Call Id: " + this.callId + "Answered...";
     }
 }

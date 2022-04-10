@@ -34,7 +34,7 @@ public class CallHandler {
             if (users.get(i).getStatus() == "Available") {
                 users.get(i).assignCall();
                 User user = users.get(i);
-                availableUsers--;
+                this.availableUsers--;
                 return user;
             }
         }
@@ -44,6 +44,7 @@ public class CallHandler {
     // mark call as answered
     public void callAnswered(User user, Call call) {
         this.availableUsers++;
+        System.out.println("Call Completed by "+user.getName());
         user.finishCall(call);
     }
 
@@ -52,6 +53,11 @@ public class CallHandler {
         // add call to queue
         callQueue.add(call);
         return true;
+    }
+
+    // returns call queue
+    public Queue<Call> callQueue() {
+        return this.callQueue;
     }
 
 }

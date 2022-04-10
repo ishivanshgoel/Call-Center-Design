@@ -1,5 +1,16 @@
 import java.util.*;
 
+// util for IncomingCall return type
+class IncomingCall {
+    User user;
+    Call call;
+    IncomingCall(User u, Call c) {
+        this.user = u;
+        this.call = c;
+    }
+}
+
+
 public class CallCenter {
 
     // accepts incoming call
@@ -30,8 +41,7 @@ public class CallCenter {
 
     // handles incoming call
     // checks user avaiability and assigns the call if someone is available
-
-    public User incomingCall() {
+    public IncomingCall incomingCall() {
 
         Call newCall = new Call(); // create new call object
 
@@ -46,7 +56,7 @@ public class CallCenter {
 
                 newCall.pickup(user);
                 System.out.println("User : " + user.getName() + " assigned the call!!");
-                return user;
+                return new IncomingCall(user, newCall);
             } else {
                 throw new Exception("All our customer executives are Busy at the moment.. Someone will take your call soon!!");
             }
@@ -60,18 +70,42 @@ public class CallCenter {
         return null;
     }
 
+    // marks call as complete
+    public void completeCall(IncomingCall call) {
+        ch.callAnswered(call.user, call.call);
+    }
+
+    // display all pending calls
+    public void pendingCalls() {
+        Queue<Call> callQueue = ch.callQueue();
+        for(Call call: callQueue){
+            System.out.println(call.getStatus());
+        }
+    }
+
 
     // tester
     public static void main(String args[]){
         CallCenter cc = new CallCenter();
-        User user1 = cc.incomingCall();
-        User user2 = cc.incomingCall();
-        User user3 = cc.incomingCall();
-        User user4 = cc.incomingCall();
-        User user5 = cc.incomingCall();
-        User user6 = cc.incomingCall();
-        User user7 = cc.incomingCall();
-        User user8 = cc.incomingCall();
+        IncomingCall c1 = cc.incomingCall();
+        IncomingCall c2 = cc.incomingCall();
+        IncomingCall c3 = cc.incomingCall();
+        IncomingCall c4 = cc.incomingCall();
+        IncomingCall c5 = cc.incomingCall();
+        IncomingCall c6 = cc.incomingCall();
+        IncomingCall c7 = cc.incomingCall();
+        IncomingCall c8 = cc.incomingCall();
+
+        cc.completeCall(c1);
+        cc.completeCall(c2);
+        cc.completeCall(c3);
+
+        IncomingCall c9 = cc.incomingCall();
+        IncomingCall c10 = cc.incomingCall();
+        IncomingCall c11 = cc.incomingCall();
+
+        cc.pendingCalls();
+
     }
 
 }
