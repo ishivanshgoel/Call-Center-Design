@@ -29,19 +29,16 @@ public class CallHandler {
     // assigns call to a user
     public User assignUser() {
 
-        User user = new User("--Dummy--", 1);
-
         // assign to a user
         for(int i = 0; i < users.size(); i++) {
             if (users.get(i).getStatus() == "Available") {
                 users.get(i).assignCall();
-                user = users.get(i);
-                break;
+                User user = users.get(i);
+                availableUsers--;
+                return user;
             }
         }
-        availableUsers--;
-
-        return user;
+        return null;
     }
 
     // mark call as answered

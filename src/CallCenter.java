@@ -32,19 +32,32 @@ public class CallCenter {
     // checks user avaiability and assigns the call if someone is available
 
     public User incomingCall() {
+
         Call newCall = new Call(); // create new call object
-        if(ch.isUserAvailable() == true){
-            // call assigned to user
-            User user = ch.assignUser();
-            newCall.pickup(user);
-            System.out.println("User : " + user.getName() + " assigned the call!!");
-            return user;
-        } else {
-            // user not available so queue the call
+
+        try{
+            if(ch.isUserAvailable() == true){
+                // call assigned to user
+                User user = ch.assignUser();
+
+                if(user == null) {
+                    throw new Exception("All our customer executives are Busy at the moment.. Someone will take your call soon!!");
+                }
+
+                newCall.pickup(user);
+                System.out.println("User : " + user.getName() + " assigned the call!!");
+                return user;
+            } else {
+                throw new Exception("All our customer executives are Busy at the moment.. Someone will take your call soon!!");
+            }
+
+        } catch(Exception e) {
+            // customer executive is not available so queue the call
             ch.queueCall(newCall);
-            System.out.println("All our customer executives are Busy at the moment.. Someone will take your call soon!!");
-            return new User("---Dummy---", 1);
+            System.out.println(e.getMessage());
         }
+
+        return null;
     }
 
 
